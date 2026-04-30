@@ -1,12 +1,22 @@
 import express from "express";
-import { createTask, getTasks, updateTask } from "../controllers/taskcontroller.js";
+import {
+  createTask,
+  getTasks,
+  updateTask,
+} from "../controllers/taskcontroller.js";
+
 import { protect } from "../middleware/auth.js";
-import { validateTask } from "../middleware/validate.js";
+import { authorizeRoles } from "../middleware/role.js";
 
 const router = express.Router();
 
-router.post("/", protect, validateTask, createTask);
+// Admin only
+router.post("/", protect, authorizeRoles("admin"), createTask);
+
+// Both admin + member
 router.get("/", protect, getTasks);
-router.put("/:id", protect, updateTask);
+
+// Admin only
+router.put("/:id", protect, authorizeRoles("admin"), updateTask);
 
 export default router;

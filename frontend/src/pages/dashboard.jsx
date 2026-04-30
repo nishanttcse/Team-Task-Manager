@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
-
+const role = localStorage.getItem("role");
 export default function Dashboard() {
   const navigate = useNavigate();
 
