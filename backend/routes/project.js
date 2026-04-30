@@ -1,5 +1,5 @@
 import express from "express";
-import { createProject, getProjects } from "../controllers/projectController.js";
+import { createProject, getProjects } from "../controllers/projectcontroller.js";
 import { protect, isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
