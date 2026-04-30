@@ -1,5 +1,5 @@
 import express from "express";
-import { createTask, getTasks, updateTask } from "../controllers/taskController.js";
+import { createTask, getTasks, updateTask } from "../controllers/taskcontroller.js";
 import { protect } from "../middleware/auth.js";
 import { validateTask } from "../middleware/validate.js";
 
