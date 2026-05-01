@@ -15,10 +15,14 @@ const app = express();
 
 // ✅ CORS (important for deployed frontend)
 app.use(cors({
-  origin: "*",
+  origin: [
+    "http://localhost:5173",
+    "https://team-task-manager-ao4seyio1-nishants-projects-ee733107.vercel.app/"
+  ],
   credentials: true,
 }));
 
+app.options("*", cors());
 app.use(express.json());
 
 // ✅ Test route
