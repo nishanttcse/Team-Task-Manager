@@ -6,36 +6,40 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import projectRoutes from "./routes/project.js";
 import taskRoutes from "./routes/task.js";
-import { errorHandler } from "./middleware/errorhandler.js"; // ⚠️ fixed casing
+import { errorHandler } from "./middleware/errorHandler.js"; // ⚠️ FIX CASE HERE
 
 dotenv.config();
+
+// ✅ Connect DB safely
 connectDB();
 
 const app = express();
 
-// ✅ CORS (important for deployed frontend)
-
+// ✅ CORS (works for both local + deployed)
 app.use(cors({
-  origin: "*",   // 🔥 TEMP allow all (fix instantly)
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 app.use(express.json());
 
-// ✅ Test route
-app.get("/", (req, res) => res.send("API Running 🚀"));
+// ✅ Health check route (IMPORTANT for Railway)
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "API Running 🚀" });
+});
 
 // ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// ✅ Error middleware MUST be last
+// ✅ Error middleware LAST
 app.use(errorHandler);
 
-// ✅ Use dynamic PORT (IMPORTANT)
+// ✅ Proper PORT binding (VERY IMPORTANT)
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}`)
-);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
