@@ -14,14 +14,12 @@ connectDB();
 const app = express();
 
 // ✅ CORS (important for deployed frontend)
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://team-task-manager-ao4seyio1-nishants-projects-ee733107.vercel.app/"
-  ],
-  credentials: true,
-}));
 
+app.use(cors({
+  origin: "*",   // 🔥 TEMP allow all (fix instantly)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.options("*", cors());
 app.use(express.json());
 
