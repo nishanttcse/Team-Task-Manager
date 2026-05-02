@@ -6,7 +6,7 @@ A full-stack web application to manage projects, assign tasks, and track progres
 
 ## 🌐 Live Demo
 
-- 🔗 Frontend: https://your-vercel-link.vercel.app
+- 🔗 Frontend: https://team-task-manager-sand.vercel.app
 - 🔗 Backend API: https://team-task-manager-production-85c7.up.railway.app
 
 ---
